@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package format="2">
+  <!--Package Header-->
+  <name>glfw3</name>
+  <version>0.0.0</version>
+  <description>The GLFW CMake package.</description>
+  <license>Mozilla Public License Version 2.0</license>
+  <url type="website">http://eigen.tuxfamily.org/</url>
+  <maintainer email="markus.staeuble@mavt.ethz.ch">Markus Staeuble</maintainer>
+  <!--Package Dependencies-->
+  <buildtool_depend>cmake</buildtool_depend>
+  <exec_depend>catkin</exec_depend>
+  <!--Package Export-->
+  <export>
+    <build_type>cmake</build_type>
+  </export>
+</package>
