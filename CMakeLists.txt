@@ -335,6 +335,32 @@ configure_file(src/glfw_config.h.in src/glfw_config.h @ONLY)
 
 configure_file(src/glfw3.pc.in src/glfw3.pc @ONLY)
 
+###
+# For local CMake/Catkin builds:
+###
+
+# NOTE: for local builds we install package configuration files according to the CMAKE_INSTALL_PREFIX
+include(GNUInstallDirs)
+option(USE_EXPORTED_LIBS "Configures the CMake package for installation in a multi-package workspace such as Catkin." OFF)
+set(GLFW_CONFIG_PATH "${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_DATADIR}/glfw3/cmake")
+if(USE_EXPORTED_LIBS)
+    # For Catkin builds
+    set(CONFIG_INCLUDE_DIRS "${CMAKE_INSTALL_PREFIX}/include/GLFW")
+    # NOTE (vt): We use these paths instea of the CMAKE_INSTALL_PREFIX path, because GLFW copies the libs w/o correct file permissions.
+    set(CONFIG_LIBRARIES
+      "${GLFW_BINARY_DIR}/src/lib${LIB_SUFFIX}glfw.so"
+      "${GLFW_BINARY_DIR}/src/lib${LIB_SUFFIX}glfw.so.3"
+      "${GLFW_BINARY_DIR}/src/lib${LIB_SUFFIX}glfw.so.3.3")
+else()
+    # For (local) pure CMake builds
+    set(CONFIG_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/include/GLFW")
+    set(CONFIG_LIBRARIES glfw)
+endif()
+list(APPEND CONFIG_LIBRARIES "${glfw_LIBRARIES}" "${glfw_PKG_LIBS}")
+# Generate the package configuration file
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/src/glfw3Config.cmake.in
+  ${CMAKE_CURRENT_BINARY_DIR}/glfw3Config.cmake @ONLY)
+
 #--------------------------------------------------------------------
 # Add subdirectories
 #--------------------------------------------------------------------

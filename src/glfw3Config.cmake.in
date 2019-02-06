@@ -1,1 +1,25 @@
-include("${CMAKE_CURRENT_LIST_DIR}/glfw3Targets.cmake")
+#include("${CMAKE_CURRENT_LIST_DIR}/glfw3Targets.cmake")
+
+# We include this module to streamline generation of standard CMake variables
+# (https://cmake.org/cmake/help/v3.5/module/FindPackageHandleStandardArgs.html)
+include(FindPackageHandleStandardArgs)
+unset(glfw3_FOUND)
+
+# Setup the noesis package variables
+set(glfw3_INCLUDE_DIRS @CONFIG_INCLUDE_DIRS@)
+set(glfw3_LIBRARIES "@CONFIG_LIBRARIES@")
+
+# Check if the path variables where set succesfully
+find_package_handle_standard_args(glfw3
+  REQUIRED_VARS
+    glfw3_INCLUDE_DIRS
+    glfw3_LIBRARIES
+)
+
+# Check if package search and setup was successful overall
+if (glfw3_FOUND)
+  message(STATUS "glfw3: includes: ${glfw3_INCLUDE_DIRS}")
+  message(STATUS "glfw3: libraries: ${glfw3_LIBRARIES}")
+endif()
+
+# EOF
