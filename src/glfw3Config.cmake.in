@@ -6,7 +6,7 @@ include(FindPackageHandleStandardArgs)
 unset(glfw3_FOUND)
 
 # Setup the noesis package variables
-set(glfw3_INCLUDE_DIRS @CONFIG_INCLUDE_DIRS@)
+set(glfw3_INCLUDE_DIRS "@CONFIG_INCLUDE_DIRS@")
 set(glfw3_LIBRARIES "@CONFIG_LIBRARIES@")
 
 # Check if the path variables where set succesfully
