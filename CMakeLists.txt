@@ -343,6 +343,7 @@ include(GNUInstallDirs)
 option(USE_EXPORTED_LIBS "Configures the CMake package for installation in a multi-package workspace such as Catkin." OFF)
 if(USE_EXPORTED_LIBS)
     # For Catkin builds
+    set(CONFIG_VERSION "${GLFW_VERSION_FULL}")
     set(CONFIG_INCLUDE_DIRS "${CMAKE_INSTALL_PREFIX}/include/GLFW")
     # NOTE (vt): We use these paths instea of the CMAKE_INSTALL_PREFIX path, because GLFW copies the libs w/o correct file permissions.
     set(CONFIG_LIBRARIES
@@ -359,8 +360,10 @@ else()
     set(CONFIG_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/include/GLFW")
     set(CONFIG_LIBRARIES glfw "${glfw_LIBRARIES}" "${glfw_PKG_LIBS}")
     # Generate the package configuration file
-    configure_file(${CMAKE_CURRENT_SOURCE_DIR}/src/glfw3Config.cmake.in
-      ${CMAKE_CURRENT_BINARY_DIR}/glfw3Config.cmake @ONLY)
+    configure_file(
+      ${CMAKE_CURRENT_SOURCE_DIR}/src/glfw3Config.cmake.in
+      ${CMAKE_CURRENT_BINARY_DIR}/glfw3Config.cmake @ONLY
+    )
 endif()
 
 #--------------------------------------------------------------------
