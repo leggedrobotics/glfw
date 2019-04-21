@@ -7,7 +7,6 @@ unset(glfw3_FOUND)
 set(glfw3_VERSION "@CONFIG_VERSION@")
 set(glfw3_INCLUDE_DIRS "@CONFIG_INCLUDE_DIRS@")
 set(glfw3_LIBRARIES "@CONFIG_LIBRARIES@")
-set(glfw3_LIBRARIES_DIR "@glfw3_LIBRARIES_DIR@")
 
 # Check if the path variables where set succesfully
 find_package_handle_standard_args(glfw3
@@ -22,7 +21,6 @@ if (glfw3_FOUND)
   message(STATUS "  Version: ${glfw3_VERSION}")
   message(STATUS "  Includes: ${glfw3_INCLUDE_DIRS}")
   message(STATUS "  Libraries: ${glfw3_LIBRARIES}")
-  message(STATUS "  Paths: ${glfw3_LIBRARIES_DIR}")
 endif()
 
 # EOF
